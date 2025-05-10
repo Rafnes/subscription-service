@@ -1,5 +1,6 @@
 package ru.webrise.subscription_service.service;
 
+import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,8 @@ public class UserService {
     }
 
     public User getUserInfo(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Пользователь с id: " + id + " не найден"));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Пользователь с id: " + id + " не найден"));
+        return user;
     }
 
     public User updateUser(Long id, CreateOrUpdateUserDTO userDTO) {
@@ -50,6 +52,7 @@ public class UserService {
         return user;
     }
 
+    @Transactional
     public void removeUser(Long id) {
         if (!userRepository.existsById(id)) {
             log.warn("Пользователь с id: {} не найден", id);

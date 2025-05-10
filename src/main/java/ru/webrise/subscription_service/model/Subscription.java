@@ -33,12 +33,12 @@ public class Subscription {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Subscription that = (Subscription) o;
-        return Objects.equals(id, that.id) && name == that.name && Objects.equals(user, that.user);
+        return Objects.equals(id, that.id) && name == that.name;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, user);
+        return Objects.hash(id, name);
     }
 
     @Override
