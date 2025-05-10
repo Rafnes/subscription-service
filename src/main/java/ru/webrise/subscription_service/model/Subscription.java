@@ -46,7 +46,6 @@ public class Subscription {
         return "Subscription{" +
                 "id=" + id +
                 ", name=" + name +
-                ", user=" + user +
                 '}';
     }
 }
