@@ -8,7 +8,7 @@ import ru.webrise.subscription_service.DTO.CreateOrUpdateUserDTO;
 import ru.webrise.subscription_service.model.User;
 import ru.webrise.subscription_service.service.UserService;
 
-@Tag(name = "Пользователи", description = "Операции для работы с пользователями")
+@Tag(name = "Пользователи", description = " пользователями")
 @RestController
 @RequestMapping("/users")
 public class UserController {
