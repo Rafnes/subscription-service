@@ -8,6 +8,7 @@ import ru.webrise.subscription_service.DTO.SubscriptionResponseDTO;
 import ru.webrise.subscription_service.DTO.TopSubscriptionResponseDTO;
 import ru.webrise.subscription_service.enums.ServiceName;
 import ru.webrise.subscription_service.exception.IllegalNameException;
+import ru.webrise.subscription_service.exception.SubscriptionAlreadyAddedException;
 import ru.webrise.subscription_service.exception.SubscriptionNotFoundException;
 import ru.webrise.subscription_service.exception.UserNotFoundException;
 import ru.webrise.subscription_service.model.Subscription;
@@ -45,6 +46,10 @@ public class SubscriptionService {
                     return new UserNotFoundException("Пользователь с id: " + userId + " не найден");
                 });
 
+
+        if (subscriptionRepository.existsByUserIdAndName(userId, ServiceName.fromString(subscriptionDTO.getName()))) {
+            throw new SubscriptionAlreadyAddedException("Такая подписка уже существует");
+        }
         Subscription subscription = new Subscription();
         subscription.setUser(user);
         subscription.setName(ServiceName.fromString(subscriptionDTO.getName()));
